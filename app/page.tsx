@@ -1,37 +1,53 @@
 export default function PortfolioHomepage() {
   const projects = [
     {
-      title: "Secure API Observability Platform",
+      title: "Secure Audit Explorer",
       blurb:
-        "Built a dashboard and telemetry pipeline for tracking API health, latency, and failure trends across internal services.",
+        "Full-stack security investigation workspace for analyzing authentication, access, and privilege events. Built with Next.js, TypeScript, Prisma, SQLite, Tailwind, and Recharts, with investigation workflows, alert cases, notes, RBAC, and production-style authentication.",
       impact: [
-        "Reduced incident triage time by 40%",
-        "Surfaced high-latency endpoints before customer impact",
-        "Designed for secure access and scalable ingestion",
+        "Investigation workflow with notes, alert cases, and analyst-friendly triage",
+        "Production-style authentication and role-based access control patterns",
+        "Full-stack architecture with Prisma data modeling and analytics visualizations",
       ],
-      stack: ["TypeScript", "React", "Node.js", "PostgreSQL", "Azure"],
+      stack: [
+        "Next.js",
+        "TypeScript",
+        "Prisma",
+        "SQLite",
+        "Tailwind",
+        "Recharts",
+      ],
+      github: "https://github.com/nicole-creech/secure-audit-explorer",
+      live: "",
+      status: "Featured Project",
     },
     {
-      title: "Identity & Access Review Automation",
+      title: "Project 2 — Coming Soon",
       blurb:
-        "Created a workflow tool that streamlined access reviews and reduced manual audit preparation for internal teams.",
+        "A production-style full-stack application focused on scalability, API design, and real-world engineering patterns.",
       impact: [
-        "Cut manual review effort by 60%",
-        "Improved traceability for security and compliance teams",
-        "Standardized approval flows across multiple applications",
+        "Built to showcase backend depth and system design thinking",
+        "Will emphasize performance, maintainability, and clean architecture",
+        "Planned as a polished portfolio piece with strong engineering tradeoffs",
       ],
-      stack: ["Java", "React", "REST APIs", "SQL"],
+      stack: ["Coming Soon"],
+      github: "",
+      live: "",
+      status: "Coming Soon",
     },
     {
-      title: "High-Performance Internal API",
+      title: "Project 3 — Coming Soon",
       blurb:
-        "Engineered a resilient internal API for high-volume transaction workflows with strong validation, monitoring, and reliability patterns.",
+        "An AI-first engineering project showcasing modern product thinking, automation, and polished user experience.",
       impact: [
-        "Handled high request throughput with stable performance",
-        "Improved maintainability with typed contracts and reusable patterns",
-        "Enabled faster feature delivery across dependent teams",
+        "Designed to highlight practical AI-assisted engineering workflows",
+        "Will focus on thoughtful UX and clear user value",
+        "Planned as a modern, high-signal project for recruiters and hiring managers",
       ],
-      stack: ["Java", "Spring Boot", "TypeScript", "AWS/Azure"],
+      stack: ["Coming Soon"],
+      github: "",
+      live: "",
+      status: "Coming Soon",
     },
   ];
 
@@ -87,6 +103,8 @@ export default function PortfolioHomepage() {
             </a>
             <a
               href="https://github.com/nicole-creech"
+              target="_blank"
+              rel="noreferrer"
               className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
             >
               GitHub
@@ -104,9 +122,8 @@ export default function PortfolioHomepage() {
             Work that shows depth, ownership, and engineering judgment.
           </h2>
           <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-            This portfolio is built around projects with clear technical scope,
-            measurable outcomes, and thoughtful tradeoffs—not vague feature
-            lists.
+            This portfolio highlights projects with clear technical scope,
+            thoughtful implementation, and strong engineering signals.
           </p>
         </div>
 
@@ -116,16 +133,22 @@ export default function PortfolioHomepage() {
               key={project.title}
               className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm"
             >
-              <h3 className="text-xl font-semibold tracking-tight">
-                {project.title}
-              </h3>
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="text-xl font-semibold tracking-tight">
+                  {project.title}
+                </h3>
+                <span className="rounded-full border border-[var(--border)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
+                  {project.status}
+                </span>
+              </div>
+
               <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
                 {project.blurb}
               </p>
 
               <div className="mt-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                  Impact
+                  Highlights
                 </p>
                 <ul className="mt-3 space-y-2 text-sm text-[var(--fg)]">
                   {project.impact.map((item) => (
@@ -146,6 +169,30 @@ export default function PortfolioHomepage() {
                     {item}
                   </span>
                 ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                {project.github ? (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-2xl border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
+                  >
+                    GitHub
+                  </a>
+                ) : null}
+
+                {project.live ? (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-2xl bg-[var(--fg)] px-4 py-2 text-sm font-medium text-[var(--bg)] transition hover:-translate-y-0.5"
+                  >
+                    Live Demo
+                  </a>
+                ) : null}
               </div>
             </article>
           ))}
@@ -197,12 +244,16 @@ export default function PortfolioHomepage() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="https://github.com/nicole-creech"
+              target="_blank"
+              rel="noreferrer"
               className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)]"
             >
               GitHub
             </a>
             <a
               href="https://www.linkedin.com/in/nicole-creech-15563a160/"
+              target="_blank"
+              rel="noreferrer"
               className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)]"
             >
               LinkedIn
