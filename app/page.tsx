@@ -91,7 +91,7 @@ export default function PortfolioHomepage() {
           <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="#projects"
-              className="rounded-2xl bg-[var(--fg)] px-5 py-3 text-sm font-medium text-[var(--bg)] shadow-sm transition hover:-translate-y-0.5"
+              className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
             >
               View Projects
             </a>
@@ -235,11 +235,10 @@ export default function PortfolioHomepage() {
             Links
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-            Let’s keep it simple.
+            Want to work together or just say hi? Find me on GitHub and LinkedIn.
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--muted)]">
-            The best portfolios are clear and easy to navigate. Recruiters and
-            hiring managers should understand your value in under a minute.
+            
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
