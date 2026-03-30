@@ -60,6 +60,7 @@ export default function PortfolioHomepage() {
           <div className="text-sm font-semibold tracking-tight">
             Nicole Creech
           </div>
+
           <nav className="hidden gap-6 text-sm text-[var(--muted)] md:flex">
             <a href="#projects" className="transition hover:text-[var(--fg)]">
               Projects
@@ -70,6 +71,12 @@ export default function PortfolioHomepage() {
             <a href="#contact" className="transition hover:text-[var(--fg)]">
               Links
             </a>
+            <a
+              href="/playground"
+              className="transition hover:text-[var(--fg)]"
+            >
+              Playground
+            </a>
           </nav>
         </div>
       </section>
@@ -79,10 +86,12 @@ export default function PortfolioHomepage() {
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-[var(--muted)]">
             Full Stack Engineer
           </p>
+
           <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
             Full stack engineer specializing in secure, scalable systems and
             high-performance APIs.
           </h1>
+
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)] md:text-xl">
             I build software that balances reliability, speed, and
             maintainability across backend services and modern web applications.
@@ -97,12 +106,21 @@ export default function PortfolioHomepage() {
             >
               View Projects
             </a>
+
+            <a
+              href="/playground"
+              className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
+            >
+              Creative Playground
+            </a>
+
             <a
               href="/resume.pdf"
               className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
             >
               Resume
             </a>
+
             <a
               href="https://github.com/nicole-creech"
               target="_blank"
@@ -215,6 +233,7 @@ export default function PortfolioHomepage() {
               Engineer first. Security-minded by default.
             </h2>
           </div>
+
           <div className="space-y-5 text-base leading-8 text-[var(--fg)]">
             <p>
               I’m a full stack engineer with experience building enterprise
