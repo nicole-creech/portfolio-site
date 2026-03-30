@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Nicole Creech | Full Stack Engineer",
   description:
-    "Full stack engineer specializing in secure, scalable systems and high-performance APIs.",
+    "Full stack engineer building secure, scalable systems, thoughtful developer tools, and creative interactive projects.",
 };
 
 export default function RootLayout({
