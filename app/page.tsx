@@ -24,18 +24,24 @@ export default function PortfolioHomepage() {
       status: "Live",
     },
     {
-      title: "Scalable API Platform",
+      title: "PulseOps",
       blurb:
-        "A production-style full-stack application focused on scalability, API design, and real-world engineering patterns.",
+        "A production-grade backend API platform for handling secure, high-volume webhook processing, signature verification, retry scheduling, and failure recovery. Designed to mirror real-world systems like Stripe and PayPal, emphasizing reliability, idempotency, and distributed system patterns.",
       impact: [
-        "Built to showcase backend depth and system design thinking",
-        "Will emphasize performance, maintainability, and clean architecture",
-        "Planned as a polished portfolio piece with strong engineering tradeoffs",
+        "Implemented secure webhook signature verification and idempotent request handling",
+        "Built retry scheduling with exponential backoff and dead-letter queue handling",
+        "Designed API contracts and backend architecture for high-volume event processing",
       ],
-      stack: ["In Progress"],
-      github: "",
-      live: "",
-      status: "Coming Soon",
+      stack: [
+        "C#",
+        ".NET",
+        "Web APIs",
+        "Background Services",
+        "Distributed Systems",
+      ],
+      github: "https://github.com/nicole-creech/pulseops",
+      live: "/projects/pulseops",
+      status: "Complete",
     },
     {
       title: "AI-First Engineering Tool",
@@ -149,74 +155,78 @@ export default function PortfolioHomepage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {projects.map((project) => (
-            <article
-              key={project.title}
-              className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="text-xl font-semibold tracking-tight">
-                  {project.title}
-                </h3>
-                <span className="rounded-full border border-[var(--border)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
-                  {project.status}
-                </span>
-              </div>
+          {projects.map((project) => {
+            const isInternalProjectPage = project.live.startsWith("/");
 
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                {project.blurb}
-              </p>
-
-              <div className="mt-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                  Highlights
-                </p>
-                <ul className="mt-3 space-y-2 text-sm text-[var(--fg)]">
-                  {project.impact.map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--fg)]" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.stack.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-[var(--border)] px-3 py-1 text-xs text-[var(--muted)]"
-                  >
-                    {item}
+            return (
+              <article
+                key={project.title}
+                className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-xl font-semibold tracking-tight">
+                    {project.title}
+                  </h3>
+                  <span className="rounded-full border border-[var(--border)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
+                    {project.status}
                   </span>
-                ))}
-              </div>
+                </div>
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                {project.live ? (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-2xl border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
-                  >
-                    Live Demo
-                  </a>
-                ) : null}
+                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+                  {project.blurb}
+                </p>
 
-                {project.github ? (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-2xl border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
-                  >
-                    View Code
-                  </a>
-                ) : null}
-              </div>
-            </article>
-          ))}
+                <div className="mt-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+                    Highlights
+                  </p>
+                  <ul className="mt-3 space-y-2 text-sm text-[var(--fg)]">
+                    {project.impact.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--fg)]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {project.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-[var(--border)] px-3 py-1 text-xs text-[var(--muted)]"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {project.live ? (
+                    <a
+                      href={project.live}
+                      target={isInternalProjectPage ? undefined : "_blank"}
+                      rel={isInternalProjectPage ? undefined : "noreferrer"}
+                      className="rounded-2xl border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
+                    >
+                      {isInternalProjectPage ? "View System Design" : "Live Demo"}
+                    </a>
+                  ) : null}
+
+                  {project.github ? (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-2xl border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
+                    >
+                      View Code
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
