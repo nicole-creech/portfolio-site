@@ -1,11 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Nicole Creech | Full Stack Engineer",
+  title: "Nicole Creech | Security-Minded Full Stack Engineer",
   description:
-    "Full stack engineer building secure, scalable systems, thoughtful developer tools, and creative interactive projects.",
+    "Full stack engineer building access controls, audit trails and reliable backends. 8+ years at JPMorgan Chase and Kroger, M.S. in Cybersecurity.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#14121a",
 };
 
 export default async function RootLayout({
