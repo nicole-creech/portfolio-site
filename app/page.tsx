@@ -1,298 +1,367 @@
-export default function PortfolioHomepage() {
-  const secureAuditLiveUrl = "https://secure-audit-explorer.vercel.app/";
+import Image from "next/image";
+import Link from "next/link";
+import Hero from "./components/Hero";
+import Motes from "./components/Motes";
+import TopBar from "./components/TopBar";
+import Wisp, { Zs } from "./components/Wisp";
 
-  const projects = [
-    {
-      title: "Secure Audit Explorer",
-      blurb:
-        "Full-stack security investigation workspace for analyzing authentication, access, and privilege events. Built with Next.js, TypeScript, Prisma, SQLite, Tailwind, and Recharts, with investigation workflows, alert cases, notes, RBAC, and production-style authentication. Includes a live demo environment for exploring the product experience.",
-      impact: [
-        "Investigation workflow with notes, alert cases, and analyst-friendly triage",
-        "Production-style authentication and role-based access control patterns",
-        "Full-stack architecture with Prisma data modeling and analytics visualizations",
-      ],
-      stack: [
-        "Next.js",
-        "TypeScript",
-        "Prisma",
-        "SQLite",
-        "Tailwind",
-        "Recharts",
-      ],
-      github: "https://github.com/nicole-creech/secure-audit-explorer",
-      live: secureAuditLiveUrl,
-      status: "Live",
-    },
-    {
-      title: "PulseOps",
-      blurb:
-        "A production-grade backend API platform for handling secure, high-volume webhook processing, signature verification, retry scheduling, and failure recovery. Designed to mirror real-world systems like Stripe and PayPal, emphasizing reliability, idempotency, and distributed system patterns.",
-      impact: [
-        "Implemented secure webhook signature verification and idempotent request handling",
-        "Built retry scheduling with exponential backoff and dead-letter queue handling",
-        "Designed API contracts and backend architecture for high-volume event processing",
-      ],
-      stack: [
-        "C#",
-        ".NET",
-        "Web APIs",
-        "Background Services",
-        "Distributed Systems",
-      ],
-      github: "https://github.com/nicole-creech/pulseops",
-      live: "/projects/pulseops",
-      status: "Complete",
-    },
-    {
-      title: "AI-First Engineering Tool",
-      blurb:
-        "A modern engineering project showcasing automation, practical AI-assisted workflows, and polished user experience.",
-      impact: [
-        "Designed to highlight practical AI-assisted engineering workflows",
-        "Will focus on thoughtful UX and clear user value",
-        "Planned as a modern, high-signal project for recruiters and hiring managers",
-      ],
-      stack: ["Coming Soon"],
-      github: "",
-      live: "",
-      status: "Coming Soon",
-    },
-  ];
+const icon = (paths: React.ReactNode) => (
+  <svg
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="var(--lavender)"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    {paths}
+  </svg>
+);
 
+const CAPABILITIES = [
+  {
+    title: "Secure systems",
+    body: "Access control, audit trails, signature verification and idempotent APIs. Backed by an M.S. in Cybersecurity.",
+    icon: icon(
+      <>
+        <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" />
+        <path d="M9 12l2 2 4-4" />
+      </>,
+    ),
+  },
+  {
+    title: "Reliable backends",
+    body: "REST APIs and microservices for high-volume financial systems, plus the observability that cut MTTR 30%.",
+    icon: icon(
+      <>
+        <rect x="4" y="4" width="16" height="6" rx="1.5" />
+        <rect x="4" y="14" width="16" height="6" rx="1.5" />
+        <path d="M8 7h.01M8 17h.01" />
+      </>,
+    ),
+  },
+  {
+    title: "AI-assisted engineering",
+    body: "Two years shipping production code with GitHub Copilot and Claude Code, plus agent workflows I set up myself with MCP tools and project context files.",
+    icon: icon(
+      <>
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2" />
+        <circle cx="12" cy="12" r="3" />
+      </>,
+    ),
+  },
+  {
+    title: "AI security",
+    body: "How AI systems get attacked, from poisoned training data to malicious model files, and how to defend them.",
+    link: { href: "/writing/data-poisoning", label: "Read the essay →" },
+    icon: icon(
+      <>
+        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z" />
+        <circle cx="12" cy="12" r="2.5" />
+      </>,
+    ),
+  },
+];
+
+const AUDIT_FEATURES = [
+  "Role-aware access: admin, analyst, viewer",
+  "Session expiry and inactivity logout",
+  "Audit event search and filtering",
+  "Detection rules and alert cases",
+  "Investigation notes and event tagging",
+  "Passwords hashed with bcrypt",
+];
+
+const EXPERIENCE = [
+  {
+    org: "JPMorgan Chase & Co.",
+    dates: "SEP 2022 – PRESENT",
+    role: "Senior Associate Software Engineer, Full Stack",
+    body: "Lead enterprise REST APIs for high-volume financial systems. Cut MTTR 30% through observability work, and ship with security and product teams through CI/CD.",
+  },
+  {
+    org: "Kroger",
+    dates: "MAR 2019 – SEP 2022",
+    role: "Site Reliability Engineer",
+    body: "Redesigned deployment and release processes, cutting change failure rate 27%. Strengthened monitoring, automation and incident response.",
+  },
+  {
+    org: "Adecco · Procter & Gamble",
+    dates: "DEC 2017 – MAR 2019",
+    role: "Computer Programmer",
+    body: "Built internal tools in C#, Python and SQL. Automated workflows and reporting that saved about $120K a year.",
+  },
+];
+
+export default function Home() {
   return (
-    <main className="min-h-screen bg-transparent text-[var(--fg)]">
-      <section className="border-b border-[var(--border)]">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-          <div className="text-sm font-semibold tracking-tight">
-            Nicole Creech
-          </div>
+    <div style={{ position: "relative", overflow: "hidden" }}>
+      <Motes />
+      <TopBar />
 
-          <nav className="hidden gap-6 text-sm text-[var(--muted)] md:flex">
-            <a href="#projects" className="transition hover:text-[var(--fg)]">
-              Projects
-            </a>
-            <a href="#about" className="transition hover:text-[var(--fg)]">
-              About
-            </a>
-            <a href="#contact" className="transition hover:text-[var(--fg)]">
-              Links
-            </a>
-            <a
-              href="/playground"
-              className="transition hover:text-[var(--fg)]"
-            >
-              Playground
-            </a>
-          </nav>
-        </div>
-      </section>
+      <main>
+        <Hero />
 
-      <section className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <div className="max-w-3xl">
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-[var(--muted)]">
-            Full Stack Engineer
-          </p>
-
-          <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-            Full stack engineer specializing in secure, scalable systems and
-            high-performance APIs.
-          </h1>
-
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)] md:text-xl">
-            I build software that balances reliability, speed, and
-            maintainability across backend services and modern web applications.
-            My focus is building systems that are secure, resilient, and
-            practical in real production environments.
-          </p>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
-            >
-              View Projects
-            </a>
-
-            <a
-              href="/playground"
-              className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
-            >
-              Creative Playground
-            </a>
-
-            <a
-              href="/resume.pdf"
-              className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
-            >
-              Resume
-            </a>
-
-            <a
-              href="https://github.com/nicole-creech"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" className="mx-auto max-w-6xl px-6 py-20">
-        <div className="mb-10 max-w-2xl">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--muted)]">
-            Featured Projects
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-            Production-minded engineering focused on security, scale, and clean
-            execution.
+        <section id="capabilities" className="wrap" style={{ paddingBottom: 120 }}>
+          <p className="eyebrow">WHAT I DO</p>
+          <h2 className="h2" style={{ marginBottom: 40 }}>
+            Four things I&apos;m good at
           </h2>
-          <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-            This portfolio highlights projects with real technical depth,
-            thoughtful implementation, and strong engineering signals.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          {projects.map((project) => {
-            const isInternalProjectPage = project.live.startsWith("/");
-
-            return (
-              <article
-                key={project.title}
-                className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-xl font-semibold tracking-tight">
-                    {project.title}
-                  </h3>
-                  <span className="rounded-full border border-[var(--border)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
-                    {project.status}
-                  </span>
-                </div>
-
-                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                  {project.blurb}
+          <div className="grid-fit" style={{ ["--min" as string]: "250px" }}>
+            {CAPABILITIES.map((c) => (
+              <div key={c.title} className="card" style={{ padding: "clamp(22px, 3vw, 28px)" }}>
+                {c.icon}
+                <h3 className="h3" style={{ marginTop: 16, fontSize: 22 }}>
+                  {c.title}
+                </h3>
+                <p style={{ margin: "10px 0 0", fontSize: 15, color: "var(--body)" }}>
+                  {c.body}
+                  {c.link && (
+                    <>
+                      {" "}
+                      <Link href={c.link.href} style={{ color: "var(--lavender)", whiteSpace: "nowrap" }}>
+                        {c.link.label}
+                      </Link>
+                    </>
+                  )}
                 </p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-                <div className="mt-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                    Highlights
-                  </p>
-                  <ul className="mt-3 space-y-2 text-sm text-[var(--fg)]">
-                    {project.impact.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--fg)]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+        <section id="work" className="wrap section">
+          <p className="eyebrow">01 · CASE FILES</p>
+          <h2 className="h2">Selected work</h2>
+          <p className="lede">Two systems I designed end to end: the problem, the decision that mattered, and what&apos;s under the hood.</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+            <article className="card case">
+              <div className="peek" aria-hidden="true">
+                <div className="pk">
+                  <Wisp size={72} />
                 </div>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.stack.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-[var(--border)] px-3 py-1 text-xs text-[var(--muted)]"
-                    >
-                      {item}
-                    </span>
+              </div>
+              <div>
+                <p className="eyebrow" style={{ color: "var(--blush)" }}>
+                  LIVE · SECURITY TOOLING
+                </p>
+                <h3 className="h3" style={{ fontSize: 34 }}>
+                  Secure Audit Explorer
+                </h3>
+                <p style={{ margin: "14px 0 0", color: "var(--body)" }}>
+                  An investigation workspace for authentication, access and privilege events, modeled on the internal
+                  tools security and compliance teams use to trace suspicious activity.
+                </p>
+                <dl className="facts">
+                  <dt>Problem</dt>
+                  <dd>Audit events pile up across systems, and analysts need one place to search them, raise alerts and record what they found.</dd>
+                  <dt>Key decision</dt>
+                  <dd>Lock the investigation tool itself down: role-scoped access, hashed credentials and sessions that expire on inactivity.</dd>
+                  <dt>Stack</dt>
+                  <dd>Next.js, TypeScript, Prisma, SQLite, Auth.js, Recharts</dd>
+                </dl>
+                <div className="btn-row">
+                  <a className="btn btn-primary" href="https://secure-audit-explorer.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    Live demo
+                  </a>
+                  <a className="btn btn-ghost" href="https://github.com/nicole-creech/secure-audit-explorer" target="_blank" rel="noopener noreferrer">
+                    Code
+                  </a>
+                </div>
+              </div>
+              <div className="panel" style={{ padding: "24px 28px" }}>
+                <p className="eyebrow" style={{ color: "var(--muted)" }}>
+                  WHAT&apos;S INSIDE
+                </p>
+                <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
+                  {AUDIT_FEATURES.map((f) => (
+                    <li key={f} style={{ display: "flex", gap: 12, fontSize: 15, color: "var(--body)" }}>
+                      <span aria-hidden="true" style={{ color: "var(--lavender)", fontFamily: "var(--font-mono)" }}>
+                        ✓
+                      </span>
+                      {f}
+                    </li>
                   ))}
+                </ul>
+              </div>
+            </article>
+
+            <article className="card case">
+              <div>
+                <p className="eyebrow" style={{ color: "var(--blush)" }}>
+                  SHIPPED · DISTRIBUTED SYSTEMS
+                </p>
+                <h3 className="h3" style={{ fontSize: 34 }}>
+                  PulseOps
+                </h3>
+                <p style={{ margin: "14px 0 0", color: "var(--body)" }}>
+                  A webhook platform modeled on Stripe and PayPal. Every request is signature-verified and idempotent;
+                  failures retry with exponential backoff and land in a dead-letter queue instead of disappearing.
+                </p>
+                <dl className="facts">
+                  <dt>Problem</dt>
+                  <dd>Forged or replayed webhooks, and events lost when a consumer goes down.</dd>
+                  <dt>Key decision</dt>
+                  <dd>Retries that raise delivery success without piling duplicate work onto downstream systems.</dd>
+                  <dt>Stack</dt>
+                  <dd>C#, .NET, Web APIs, background services</dd>
+                </dl>
+                <div className="btn-row">
+                  <Link className="btn btn-primary" href="/projects/pulseops">
+                    System design
+                  </Link>
+                  <a className="btn btn-ghost" href="https://github.com/nicole-creech/pulseops" target="_blank" rel="noopener noreferrer">
+                    Code
+                  </a>
                 </div>
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {project.live ? (
-                    <a
-                      href={project.live}
-                      target={isInternalProjectPage ? undefined : "_blank"}
-                      rel={isInternalProjectPage ? undefined : "noreferrer"}
-                      className="rounded-2xl border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
-                    >
-                      {isInternalProjectPage ? "View System Design" : "Live Demo"}
-                    </a>
-                  ) : null}
-
-                  {project.github ? (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="rounded-2xl border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--fg)] transition hover:-translate-y-0.5"
-                    >
-                      View Code
-                    </a>
-                  ) : null}
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section
-        id="about"
-        className="border-y border-[var(--border)] bg-[var(--card-2)]"
-      >
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-20 md:grid-cols-[1fr_2fr]">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--muted)]">
-              About
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-              Engineer first. Security-minded by default.
-            </h2>
+              </div>
+              <Link href="/projects/pulseops#architecture" className="panel" style={{ display: "block", background: "#fff", padding: 12 }}>
+                <Image
+                  src="/images/pulseops-architecture-diagram-v2.svg"
+                  alt="PulseOps architecture: ingestion, signature verification, persistence, retry scheduling and dead-letter handling"
+                  width={1700}
+                  height={1080}
+                  unoptimized
+                  style={{ width: "100%", height: "auto", display: "block" }}
+                />
+              </Link>
+            </article>
           </div>
+        </section>
 
-          <div className="space-y-5 text-base leading-8 text-[var(--fg)]">
-            <p>
-              I’m a full stack engineer with experience building enterprise
-              software in high-accountability environments. My background spans
-              backend APIs, front-end application development, internal tools,
-              and systems that need to be both reliable and secure.
-            </p>
-            <p>
-              I care about clean architecture, thoughtful developer experience,
-              and shipping solutions that solve real business problems. I’m
-              especially interested in projects that sit at the intersection of
-              software engineering, security, and scale.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="mx-auto max-w-6xl px-6 py-20">
-        <div className="rounded-3xl border border-[var(--border)] p-8 md:p-10">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--muted)]">
-            Links
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-            Want to work together or just say hi? Find me on GitHub and LinkedIn.
+        <section id="writing" className="wrap section">
+          <p className="eyebrow">02 · WRITING</p>
+          <h2 className="h2" style={{ marginBottom: 40 }}>
+            Notes from the haunted side of security
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--muted)]">
-            I’m focused on building secure, scalable software and thoughtful
-            developer experiences across modern web applications.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href="https://github.com/nicole-creech"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)]"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://www.linkedin.com/in/nicole-creech-15563a160/"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-2xl border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--fg)]"
-            >
-              LinkedIn
+          <Link className="card" href="/writing/data-poisoning" style={{ padding: "clamp(28px, 4vw, 44px)" }}>
+            <p className="eyebrow" style={{ color: "var(--blush)" }}>
+              AI SECURITY · NOV 2026 · 9 MIN READ
+            </p>
+            <h3 className="h3" style={{ maxWidth: 820, fontSize: "clamp(28px, 3.4vw, 40px)" }}>
+              Data poisoning: how attackers corrupt the data your models learn from
+            </h3>
+            <p style={{ margin: "16px 0 0", maxWidth: 720, color: "var(--body)" }}>
+              Five real cases, from Microsoft Tay to malicious models on Hugging Face, and the controls I&apos;d put in
+              place on a real team.
+            </p>
+            <p style={{ margin: "24px 0 0", fontWeight: 600, color: "var(--lavender)" }}>Read the essay →</p>
+          </Link>
+        </section>
+
+        <section id="experience" className="wrap section">
+          <p className="eyebrow">03 · EXPERIENCE</p>
+          <h2 className="h2" style={{ marginBottom: 40 }}>
+            8+ years, three teams
+          </h2>
+          <ol className="timeline">
+            {EXPERIENCE.map((job) => (
+              <li key={job.org}>
+                <div>
+                  <p style={{ margin: 0, fontWeight: 600 }}>{job.org}</p>
+                  <p style={{ margin: "2px 0 0", fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--muted)" }}>{job.dates}</p>
+                </div>
+                <div className="role">
+                  <p style={{ margin: 0, fontWeight: 600 }}>{job.role}</p>
+                  <p style={{ margin: "6px 0 0", color: "var(--body)" }}>{job.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div className="btn-row">
+            <a className="btn btn-ghost" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+              Download resume (PDF)
             </a>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        <section id="playground" className="wrap section">
+          <p className="eyebrow">04 · PLAYGROUND</p>
+          <h2 className="h2">Things I build for fun</h2>
+          <p className="lede">Where I play with interaction design and developer experience. Wisp lives here, mostly.</p>
+          <div className="grid-fit" style={{ ["--min" as string]: "340px", gap: 28 }}>
+            <article className="card" style={{ padding: "clamp(24px, 4vw, 36px)" }}>
+              <div
+                className="panel"
+                style={{ height: 180, marginBottom: 24, display: "flex", alignItems: "center", justifyContent: "center", border: 0 }}
+              >
+                <span className="bob" style={{ display: "block", filter: "drop-shadow(0 0 20px rgba(185,166,255,.45))" }}>
+                  <Wisp size={120} />
+                </span>
+              </div>
+              <p className="eyebrow" style={{ color: "var(--blush)" }}>
+                LIVE · VS CODE EXTENSION
+              </p>
+              <h3 className="h3" style={{ fontSize: 28 }}>
+                Pocket Ghost
+              </h3>
+              <p style={{ margin: "10px 0 0", color: "var(--body)" }}>
+                A ghost companion for coding sessions. Wisp follows your cursor, reacts to your work and keeps you
+                company in focus mode. Ships as a web app and a VS Code extension.
+              </p>
+              <div className="btn-row" style={{ marginTop: 24 }}>
+                <a className="btn btn-primary" href="https://pocket-ghost.vercel.app/" target="_blank" rel="noopener noreferrer">
+                  Meet Wisp
+                </a>
+                <a className="btn btn-ghost" href="https://github.com/nicole-creech/pocket-ghost" target="_blank" rel="noopener noreferrer">
+                  Extension
+                </a>
+              </div>
+            </article>
+
+            <article className="card" style={{ padding: "clamp(24px, 4vw, 36px)" }}>
+              <p className="eyebrow" style={{ color: "var(--muted)" }}>
+                INDEPENDENT · DETAILS ON REQUEST
+              </p>
+              <h3 className="h3" style={{ fontSize: 28 }}>
+                Solo game development
+              </h3>
+              <p style={{ margin: "10px 0 0", color: "var(--body)" }}>
+                I run a small independent game studio on my own, from design and engineering to tooling and release.
+              </p>
+              <ul style={{ margin: "16px 0 0", paddingLeft: 20, display: "flex", flexDirection: "column", gap: 6, color: "var(--body)", fontSize: 15 }}>
+                <li>Unity and C#, end to end</li>
+                <li>Agent-driven workflow with Claude Code and MCP tools for repetitive dev work</li>
+              </ul>
+              <p style={{ margin: "16px 0 0", fontSize: 14, color: "var(--muted)" }}>Studio and titles shared privately in interviews.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" className="wrap" style={{ paddingTop: 40, paddingBottom: 96 }}>
+          <div className="card" style={{ padding: "clamp(28px, 5vw, 56px) clamp(24px, 5vw, 48px)" }}>
+            <p className="eyebrow">05 · SAY HELLO</p>
+            <h2 className="h2" style={{ maxWidth: 760 }}>
+              Building something that has to be trustworthy? Let&apos;s talk.
+            </h2>
+            <div className="btn-row" style={{ marginTop: 36 }}>
+              <a className="btn btn-primary" href="mailto:creech.ns@gmail.com">
+                creech.ns@gmail.com
+              </a>
+              <a className="btn btn-ghost" href="https://www.linkedin.com/in/nicole-creech-15563a160/" target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
+              <a className="btn btn-ghost" href="https://github.com/nicole-creech" target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+            </div>
+          </div>
+
+          <div style={{ marginTop: 72, display: "flex", alignItems: "center", gap: 14 }}>
+            <span style={{ position: "relative", display: "block", transform: "rotate(-8deg)", opacity: 0.8, filter: "drop-shadow(0 0 8px rgba(185,166,255,.4))" }}>
+              <Wisp size={48} lid={0.12} />
+              <Zs fontSize={12} style={{ right: -6, top: -8 }} />
+            </span>
+            <p style={{ margin: 0, fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--faint)" }}>
+              © 2026 Nicole Creech · wisp is napping · from pocket ghost
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }

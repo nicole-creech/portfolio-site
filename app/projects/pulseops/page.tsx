@@ -59,7 +59,7 @@ export default function PulseOpsPage() {
         </Link>
 
         <Link
-          href="/#projects"
+          href="/#work"
           className="text-sm text-[var(--muted)] transition hover:text-[var(--fg)]"
         >
           Back to Projects
