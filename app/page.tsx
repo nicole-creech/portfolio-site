@@ -162,7 +162,7 @@ export default function Home() {
                   <dt>Key decision</dt>
                   <dd>Lock the investigation tool itself down: role-scoped access, hashed credentials and sessions that expire on inactivity.</dd>
                   <dt>Stack</dt>
-                  <dd>Next.js, TypeScript, Prisma, SQLite, Auth.js, Recharts</dd>
+                  <dd>Next.js, TypeScript, Prisma, PostgreSQL (Neon), Auth.js, Recharts</dd>
                 </dl>
                 <div className="btn-row">
                   <a className="btn btn-primary" href="https://secure-audit-explorer.vercel.app/" target="_blank" rel="noopener noreferrer">
@@ -272,11 +272,6 @@ export default function Home() {
               </li>
             ))}
           </ol>
-          <div className="btn-row">
-            <a className="btn btn-ghost" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-              Download resume (PDF)
-            </a>
-          </div>
         </section>
 
         <section id="playground" className="wrap section">
