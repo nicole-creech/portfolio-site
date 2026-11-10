@@ -8,7 +8,7 @@ Portfolio for a security-minded full stack engineer: case studies, writing on AI
 
 - **Case files:** Secure Audit Explorer and PulseOps, each with the problem, the key decision and the stack
 - **Writing:** an essay on data poisoning and AI supply chain attacks (`/writing/data-poisoning`)
-- **Experience:** JPMorgan Chase, Kroger, Procter & Gamble (via Adecco), plus a downloadable resume
+- **Experience:** JPMorgan Chase, Kroger and Procter & Gamble (via Adecco)
 - **Playground:** Pocket Ghost and independent game development
 - **PulseOps system design:** architecture diagram and engineering decisions (`/projects/pulseops`)
 
